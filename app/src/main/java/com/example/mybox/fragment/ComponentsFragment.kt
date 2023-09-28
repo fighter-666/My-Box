@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myapplication.recharge.view.property.Piggy
 import com.example.mybox.R
+import com.example.mybox.activity.RechargePageActivity
 import com.example.mybox.adapter.ComponentsAdapter
 import com.example.mybox.databinding.FragmentComponentsBinding
 import com.gyf.immersionbar.ImmersionBar

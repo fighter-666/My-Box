@@ -9,21 +9,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.example.myapplication.R
-import com.example.myapplication.databinding.ActivityRechargePageBinding
-import com.example.myapplication.recharge.adapter.CrossExchangeAdapter
-import com.example.myapplication.recharge.adapter.FragmentAdapter
-import com.example.myapplication.recharge.adapter.RecommendationServiceAdapteer
-import com.example.myapplication.recharge.data.GetFeedTabData
-import com.example.myapplication.recharge.property.Piggy
-import com.example.myapplication.recharge.property.Second
-import com.example.myapplication.recharge.widget.ScrollImageView
-import com.example.myapplication.recharge.widget.ScrollTextView
-import com.example.myapplication.recharge.widget.ScrollTextViewBackground
 import com.example.myapplication.util.DensityUtils
+import com.example.mybox.R
+import com.example.mybox.databinding.ActivityRechargePageBinding
+import com.example.mybox.recharge.adapter.FragmentAdapter
+import com.example.mybox.recharge.data.GetFeedTabData
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
@@ -66,7 +58,7 @@ class RechargePageActivity : AppCompatActivity() {
         //将 offscreenPageLimit 属性设置为 tab的数量，表示 ViewPager 会在当前页面的左右各保留 tab数量 个页面的缓存。
         // 这样可以提高用户体验，因为用户在滑动 ViewPager 时，相邻的页面已经被缓存，可以更快地进行加载和显示
         // 延迟设置offscreenPageLimit属性，防止进入activity时的等待
-            binding.viewPager2.offscreenPageLimit = tabList.tabList.size - 1
+        binding.viewPager2.offscreenPageLimit = tabList.tabList.size - 1
 
 
         val adapter = FragmentAdapter(supportFragmentManager, lifecycle)
@@ -188,12 +180,12 @@ class RechargePageActivity : AppCompatActivity() {
                     }
 
 
-                    /* val tabIconResourceName = tabItem.tabIcon.substringAfter("R.drawable.")
-                     //使用 resources.getIdentifier(tabIconResourceName, "drawable", packageName)，
-                     // 我们通过资源名称、资源类型（这里是 "drawable"）和包名来获取资源的标识符
-                     val resourceId =
-                         resources.getIdentifier(tabIconResourceName, "drawable", packageName)
-                     tabIcon.setImageResource(resourceId)*/
+                    val tabIconResourceName = tabItem.tabIcon.substringAfter("R.drawable.")
+                    //使用 resources.getIdentifier(tabIconResourceName, "drawable", packageName)，
+                    // 我们通过资源名称、资源类型（这里是 "drawable"）和包名来获取资源的标识符
+                    val resourceId =
+                        resources.getIdentifier(tabIconResourceName, "drawable", packageName)
+                    tabIcon.setImageResource(resourceId)
                 }
             }
 
@@ -217,131 +209,13 @@ class RechargePageActivity : AppCompatActivity() {
         }
         mediator.attach()
 
-        //消息条
-        //右边textview跑马灯
-        val marqueeText2: ScrollTextViewBackground = binding.tvScrollBackground
-        val demographicsList2: MutableList<String> = ArrayList()
-        demographicsList2.add("股票")
-        demographicsList2.add("药业")
-        demographicsList2.add("上市")
-        marqueeText2.setList(demographicsList2)
-        marqueeText2.startScroll()
 
-        //imageview跑马灯
-        val marqueeText3: ScrollImageView = binding.imScroll
-        val demographicsList3: MutableList<Int> = ArrayList()
-        demographicsList3.add(R.drawable.card3)
-        demographicsList3.add(R.drawable.beans)
-        demographicsList3.add(R.drawable.card2)
-        marqueeText3.setList(demographicsList3)
-        marqueeText3.startScroll()
-
-        //中间textview跑马灯
-        val marqueeText: ScrollTextView = binding.tvScroll
-        val demographicsList: MutableList<String> = ArrayList()
-        demographicsList.add("今日测试股票 上市")
-        demographicsList.add("今日科伦药业 中国人保 可申购今日科伦药业 中国人保 可申购今日科伦药业 中国人保 可申购今日科伦药业 中国人保 可申购今日科伦药业 中国人保 可申购今日科伦药业 中国人保 可申购")
-        demographicsList.add("今日中国平安 上市")
-        marqueeText.setList(demographicsList)
-        marqueeText.startScroll()
-
-        //第一个 recyclerView 3个item 的时候
-        val piggies = mutableListOf<Piggy>()
-        piggies.add(Piggy(R.drawable.image1, "充流量", "流量告急速订购"))
-        piggies.add(Piggy(R.drawable.image2, "开通自动充", "专治忘充值"))
-        piggies.add(Piggy(R.drawable.image3, "电子发票", "批量开票不排队"))
-
-        //创建适配器
-        val myAdapter =
-            RecommendationServiceAdapteer(R.layout.adapter_recommendation_service, piggies)
-
-        //设置布局管理器
-        binding.rvRecommendationService.layoutManager = LinearLayoutManager(
-            this, LinearLayoutManager.HORIZONTAL, false
-        )
-
-        //给RecycleView设置适配器
-        binding.rvRecommendationService.adapter = myAdapter
-
-        //添加装饰器
-        //binding.rvRecommendationService.addItemDecoration(FirstDecoration())
-
-        //第一个 recyclerViewCopy 页面超过3个，显示3.5个item 的时候
-        val piggiesCopy = mutableListOf<Piggy>()
-        piggiesCopy.add(Piggy(R.drawable.image1, "充流量", "流量告急速订购"))
-        piggiesCopy.add(Piggy(R.drawable.image2, "开通自动充", "专治忘充值"))
-        piggiesCopy.add(Piggy(R.drawable.image3, "电子发票", "批量开票不排队"))
-        piggiesCopy.add(Piggy(R.drawable.image4, "充值记录", "可查全网记录"))
-        piggiesCopy.add(Piggy(R.drawable.image4, "充值记录", "可查全网记录"))
-        piggiesCopy.add(Piggy(R.drawable.image4, "充值记录", "可查全网记录"))
-        piggiesCopy.add(Piggy(R.drawable.image4, "充值记录", "可查全网记录"))
-
-        //创建适配器
-        val myAdapterCopy =
-            RecommendationServiceAdapteer(R.layout.adapter_recommendation_service, piggiesCopy)
-
-        //设置布局管理器
-        binding.rvRecommendationServiceCopy.layoutManager = LinearLayoutManager(
-            this, LinearLayoutManager.HORIZONTAL, false
-        )
-
-        //给RecycleView设置适配器
-        binding.rvRecommendationServiceCopy.adapter = myAdapterCopy
-
-        //添加装饰器
-        //binding.rvRecommendationServiceCopy.addItemDecoration(FirstDecoration())
-
-
-        //第二个
-        val piggies2 = mutableListOf<Second>()
-        piggies2.add(
-            Second(
-                R.drawable.tengxun, "腾讯视频会员\n" + "周卡", "1000金豆", 0
-            )
-        )
-        piggies2.add(
-            Second(
-                R.drawable.youku,
-                "优酷视频会员\n" + "周卡",
-                "1500金豆",
-                R.drawable.shape_rectangle16
-            )
-        )
-        piggies2.add(
-            Second(
-                R.drawable.youku, "腾讯视频会员\n" + "周卡", "1000金豆", 0
-            )
-        )
-        piggies2.add(
-            Second(
-                R.drawable.youku, "腾讯视频会员\n" + "周卡", "1000金豆", 0
-            )
-        )
-        piggies2.add(
-            Second(
-                R.drawable.tengxun, "腾讯视频会员\n" + "周卡", "1000金豆", 0
-            )
-        )
-        piggies2.add(
-            Second(
-                R.drawable.tengxun, "腾讯视频会员\n" + "周卡", "1000金豆", 0
-            )
-        )
-
-        //创建适配器
-        val secondAdapter = CrossExchangeAdapter(R.layout.adapter_cross_exchenge, piggies2)
-
-        //设置布局管理器
-        binding.rvCrossExchange.layoutManager = LinearLayoutManager(
-            this, LinearLayoutManager.HORIZONTAL, false
-        )
-
-        //给RecycleView设置适配器
-        binding.rvCrossExchange.adapter = secondAdapter
     }
 
-    companion object {
-        lateinit var link: String
-    }
+
+        companion object {
+            lateinit var link: String
+        }
+
+
 }
-
