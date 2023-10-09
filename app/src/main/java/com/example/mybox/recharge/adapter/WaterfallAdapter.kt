@@ -12,6 +12,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.example.mybox.R
+import com.example.mybox.adapter.ComponentsAdapter
 import com.example.mybox.databinding.ActivityBannerBinding
 import com.example.mybox.databinding.WidgetMultipleItemCommonBinding
 import com.example.mybox.databinding.WidgetMultipleItemManyImageBinding
@@ -29,9 +30,6 @@ import kotlinx.coroutines.launch
 
 class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
     BaseMultiItemQuickAdapter<GetFeedListData.FeedListBean, BaseViewHolder>(data) {
-
-    //一个可为空的函数类型变量，用于保存点击事件的监听器
-    //private var onItemClickListener: ((GetFeedListData.FeedListBean) -> Unit)? = null
 
     init {
         addItemType(
@@ -63,9 +61,8 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
     }
 
     override fun convert(holder: BaseViewHolder, item: GetFeedListData.FeedListBean) {
-        //holder.addOnClickListener(R.id.btn_select)
         when (holder.itemViewType) {
-         GetFeedListData.FEED_ADAPTER_ITEM_TYPE.MANY_IMAGE -> {
+            GetFeedListData.FEED_ADAPTER_ITEM_TYPE.MANY_IMAGE -> {
                 // 处理多图布局
                 val binding = WidgetMultipleItemManyImageBinding.bind(holder.itemView)
 
@@ -82,9 +79,8 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                     }
                 }
 
-                val myAdapter = ManyImageGridAdapter(
-                    R.layout.adapter_recharge_many_image_grid, item.picArea.picList
-                )
+
+                val myAdapter = ManyImageGridAdapter(R.layout.adapter_recharge_many_image_grid, item.picArea.picList)
 
                 //设置布局管理器和给recyclerView设置适配器
                 binding.rvPicAreaImageUrl.apply {
@@ -225,6 +221,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
               }
 
               GetFeedListData.FEED_LIST_ITEM_TYPE.RECHARGE.toInt() -> {
+                  holder.addOnClickListener(R.id.btn_select)
                   // 处理充值布局
                   val binding = WidgetMultipleItemRechargeBinding.bind(holder.itemView)
 

@@ -15,6 +15,18 @@ class WapFragment : BaseLazyFragment() {
     private var _binding: FragmentRechargeWaterfallBaiduBinding? = null
     val binding get() = _binding!!
 
+    companion object {
+        private const val ARG_TAB_NAME = "tabName"
+
+        fun newInstance(tabName: Int): WapFragment {
+            val args = Bundle()
+            args.putString(ARG_TAB_NAME, tabName.toString())
+            val fragment = WapFragment()
+            fragment.arguments = args
+            return fragment
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -23,8 +35,6 @@ class WapFragment : BaseLazyFragment() {
         _binding = FragmentRechargeWaterfallBaiduBinding.inflate(inflater, container, false)
         return binding.root
     }
-
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

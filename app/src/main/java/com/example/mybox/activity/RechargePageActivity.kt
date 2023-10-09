@@ -7,14 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.example.myapplication.recharge.fragment.WapFragment
+import com.example.myapplication.recharge.fragment.WaterfallFragment
 import com.example.myapplication.util.DensityUtils
 import com.example.mybox.R
 import com.example.mybox.databinding.ActivityRechargePageBinding
 import com.example.mybox.recharge.adapter.FragmentAdapter
+import com.example.mybox.recharge.adapter.Viewpager2Adapter
 import com.example.mybox.recharge.data.GetFeedTabData
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -57,12 +62,35 @@ class RechargePageActivity : AppCompatActivity() {
 
         //将 offscreenPageLimit 属性设置为 tab的数量，表示 ViewPager 会在当前页面的左右各保留 tab数量 个页面的缓存。
         // 这样可以提高用户体验，因为用户在滑动 ViewPager 时，相邻的页面已经被缓存，可以更快地进行加载和显示
-        // 延迟设置offscreenPageLimit属性，防止进入activity时的等待
         binding.viewPager2.offscreenPageLimit = tabList.tabList.size - 1
 
 
-        val adapter = FragmentAdapter(supportFragmentManager, lifecycle)
-        binding.viewPager2.adapter = adapter
+        val adapter = Viewpager2Adapter(this)
+
+        binding.viewPager2.adapter =adapter
+
+        binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                Toast.makeText(applicationContext, "position:$position", Toast.LENGTH_SHORT).show()
+                // Here, position indicates the currently visible fragment's index.
+            }
+        })
+
+
+        /* for (tab in tabList.tabList) {
+             adapter.addFragment(WapFragment.newInstance(tab))
+         }*/
+
+        // 添加  frament
+        for (i in tabList.tabList.indices) {
+            when (i) {
+                0 -> adapter.addFragment(WaterfallFragment.newInstance(i))
+                1 -> adapter.addFragment(WapFragment.newInstance(i))
+                else -> adapter.addFragment(WaterfallFragment.newInstance(i))
+                // ...为其他indexes添加对应的Fragment
+            }
+        }
 
         //创建了一个TabLayoutMediator对象，并将其与TabLayout和ViewPager2进行关联。
         val mediator = TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position ->

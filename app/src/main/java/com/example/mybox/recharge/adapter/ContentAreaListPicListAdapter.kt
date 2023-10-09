@@ -1,5 +1,6 @@
 package com.example.mybox.recharge.adapter
 
+import android.widget.ImageView
 import androidx.annotation.LayoutRes
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -13,6 +14,7 @@ import com.example.mybox.recharge.data.GetFeedListData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+
 
 class ContentAreaListPicListAdapter(
     @LayoutRes layoutResId: Int,

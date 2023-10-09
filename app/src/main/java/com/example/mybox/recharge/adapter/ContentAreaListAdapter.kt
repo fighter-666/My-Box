@@ -77,7 +77,7 @@ class ContentAreaListAdapter(
                 //saleTipList : 随销条
             }
 
-            //3：价格
+           //3：价格
             "3" -> {
                 //price : 价格
                 if (item.price != null) {
@@ -227,90 +227,90 @@ class ContentAreaListAdapter(
             }
 
             //5：倒计时
-            "5" -> {
-                // 获取倒计时数据结构
-                val countDownBean = item.countDown // 假设从接口获取到倒计时数据结构
+                    "5" -> {
+                          // 获取倒计时数据结构
+                          val countDownBean = item.countDown // 假设从接口获取到倒计时数据结构
 
-                // 判断是显示距开始还是距结束
-                val isCountingDownToStart =
-                    shouldDisplayCountdownToStart(countDownBean)
+                          // 判断是显示距开始还是距结束
+                          val isCountingDownToStart =
+                              shouldDisplayCountdownToStart(countDownBean)
 
-                // 计算距离开始或结束的剩余时间
-                val remainingTimeInMillis =
-                    getRemainingTimeInMillis(countDownBean, isCountingDownToStart)
+                          // 计算距离开始或结束的剩余时间
+                          val remainingTimeInMillis =
+                              getRemainingTimeInMillis(countDownBean, isCountingDownToStart)
 
-                // 显示倒计时信息
-                binding.tvCountDownBackground.visibility = View.VISIBLE
-                binding.tvCountDown.visibility = View.VISIBLE
-                //创建了一个CountDownTimer对象，并设置了倒计时的逻辑
-                val countDownTimer =
-                    object : CountDownTimer(remainingTimeInMillis, 1000) {
-                        //实现onTick方法：覆盖CountDownTimer类的onTick方法。在每个时间间隔（这里是1000毫秒）内，该方法会被调用一次
-                        override fun onTick(millisUntilFinished: Long) {
-                            //更新倒计时文本
-                            var countdownText = formatCountdownText(
-                                millisUntilFinished,
-                                isCountingDownToStart
-                            )
-                            if (isCountingDownToStart) {
-                                countdownText = "距开始  $countdownText"
-                                binding.tvCountDown.setBackgroundResource(R.drawable.shape_recharge_count_down_start)
-                                binding.tvCountDownBackground.setBackgroundResource(
-                                    R.drawable.shape_recharge_count_down_background_start
-                                )
-                                val colorSpan =
-                                    ForegroundColorSpan(Color.parseColor("#f5a937"))
-                                //设置文字的时间颜色为橘黄色
-                                val spannableString = SpannableString(countdownText)
-                                spannableString.setSpan(
-                                    colorSpan,
-                                    3,
-                                    spannableString.length,
-                                    Spanned.SPAN_INCLUSIVE_EXCLUSIVE
-                                )
-                                //设置文字的前景色为白色色
-                                val colorSpan2 =
-                                    ForegroundColorSpan(Color.parseColor("#ffffff"))
-                                spannableString.setSpan(
-                                    colorSpan2,
-                                    0,
-                                    3,
-                                    Spanned.SPAN_INCLUSIVE_EXCLUSIVE
-                                )
-                                binding.tvCountDown.text = spannableString
-                            } else {
-                                countdownText = "距结束  $countdownText"
-                                binding.tvCountDown.setBackgroundResource(R.drawable.shape_recharge_count_down)
-                                //设置文字的前景色为白色
-                                val spannableString = SpannableString(countdownText)
-                                val colorSpan =
-                                    ForegroundColorSpan(Color.parseColor("#ffffff"))
-                                spannableString.setSpan(
-                                    colorSpan,
-                                    0,
-                                    3,
-                                    Spanned.SPAN_INCLUSIVE_EXCLUSIVE
-                                )
-                                binding.tvCountDown.text = spannableString
-                                binding.tvCountDown.text = spannableString
-                            }
-                        }
+                          // 显示倒计时信息
+                          binding.tvCountDownBackground.visibility = View.VISIBLE
+                          binding.tvCountDown.visibility = View.VISIBLE
+                          //创建了一个CountDownTimer对象，并设置了倒计时的逻辑
+                          val countDownTimer =
+                              object : CountDownTimer(remainingTimeInMillis, 1000) {
+                                  //实现onTick方法：覆盖CountDownTimer类的onTick方法。在每个时间间隔（这里是1000毫秒）内，该方法会被调用一次
+                                  override fun onTick(millisUntilFinished: Long) {
+                                      //更新倒计时文本
+                                      var countdownText = formatCountdownText(
+                                          millisUntilFinished,
+                                          isCountingDownToStart
+                                      )
+                                      if (isCountingDownToStart) {
+                                          countdownText = "距开始  $countdownText"
+                                          binding.tvCountDown.setBackgroundResource(R.drawable.shape_recharge_count_down_start)
+                                          binding.tvCountDownBackground.setBackgroundResource(
+                                              R.drawable.shape_recharge_count_down_background_start
+                                          )
+                                          val colorSpan =
+                                              ForegroundColorSpan(Color.parseColor("#f5a937"))
+                                          //设置文字的时间颜色为橘黄色
+                                          val spannableString = SpannableString(countdownText)
+                                          spannableString.setSpan(
+                                              colorSpan,
+                                              3,
+                                              spannableString.length,
+                                              Spanned.SPAN_INCLUSIVE_EXCLUSIVE
+                                          )
+                                          //设置文字的前景色为白色色
+                                          val colorSpan2 =
+                                              ForegroundColorSpan(Color.parseColor("#ffffff"))
+                                          spannableString.setSpan(
+                                              colorSpan2,
+                                              0,
+                                              3,
+                                              Spanned.SPAN_INCLUSIVE_EXCLUSIVE
+                                          )
+                                          binding.tvCountDown.text = spannableString
+                                      } else {
+                                          countdownText = "距结束  $countdownText"
+                                          binding.tvCountDown.setBackgroundResource(R.drawable.shape_recharge_count_down)
+                                          //设置文字的前景色为白色
+                                          val spannableString = SpannableString(countdownText)
+                                          val colorSpan =
+                                              ForegroundColorSpan(Color.parseColor("#ffffff"))
+                                          spannableString.setSpan(
+                                              colorSpan,
+                                              0,
+                                              3,
+                                              Spanned.SPAN_INCLUSIVE_EXCLUSIVE
+                                          )
+                                          binding.tvCountDown.text = spannableString
+                                          binding.tvCountDown.text = spannableString
+                                      }
+                                  }
 
-                        override fun onFinish() {
-                            // 倒计时结束
-                            binding.tvCountDown.visibility = View.GONE
-                            binding.tvCountDownBackground.visibility = View.GONE
-                        }
-                    }
+                                  override fun onFinish() {
+                                      // 倒计时结束
+                                      binding.tvCountDown.visibility = View.GONE
+                                      binding.tvCountDownBackground.visibility = View.GONE
+                                  }
+                              }
 
-                // 启动倒计时
-                countDownTimer.start()
-            }
+                          // 启动倒计时
+                          countDownTimer.start()
+                      }
 
-            //6：人数
-            "6" -> {
-                if (item.numText != null) {
-                    /*val priceInTenThousand = item.numText.toFloat() / 10000.0f
+                      //6：人数
+                      "6" -> {
+                          if (item.numText != null) {
+                              /*val priceInTenThousand = item.numText.toFloat() / 10000.0f
                   String.format("%.1f", priceInTenThousand) + " 万"
                   binding.tvNumText.text = priceInTenThousand.toString()*/
                     binding.tvNumText.text = item.numText
@@ -319,7 +319,7 @@ class ContentAreaListAdapter(
             }
 
             //7：配图：一行一个
-            "7" -> {
+      /*      "7" -> {
 
                 val rechargeAdapter = ContentAreaListPicListAdapter(
                     R.layout.adapter_recharge_contentarealist_piclist,
@@ -328,11 +328,11 @@ class ContentAreaListAdapter(
 
                 //设置布局管理器和给recyclerView 设置设配器
                 binding.rvPicList.apply {
-                    layoutManager = LinearLayoutManager(context)
+                    layoutManager = LinearLayoutManager(mContext)
                     adapter = rechargeAdapter
                 }
 
-            }
+            }*/
 
             //8：配图2：一行两个
             "8" -> {
@@ -348,13 +348,13 @@ class ContentAreaListAdapter(
                 }
             }
 
-            //9：末尾卡片按钮列表
-            "9" -> {
-                binding.tvNullTitleFirst.text =
-                    item.completionInfo.title
-                binding.tvNullTitleFirst.visibility =
-                    View.VISIBLE
-            }
+               //9：末尾卡片按钮列表
+                "9" -> {
+                   binding.tvNullTitleFirst.text =
+                       item.completionInfo.title
+                   binding.tvNullTitleFirst.visibility =
+                       View.VISIBLE
+               }
 
             else -> {
             }
