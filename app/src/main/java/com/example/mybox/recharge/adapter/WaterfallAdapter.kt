@@ -123,7 +123,6 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                //卡片锁宽等比缩放（imageRatio用来计算高度）
                val layoutParams = binding.ivPicAreaImageUrl.layoutParams as ConstraintLayout.LayoutParams
                layoutParams.dimensionRatio = item.picArea.imageRatio // 例如，设置宽高比为16:9
-
                binding.ivPicAreaImageUrl.layoutParams = layoutParams
 
                //val imageRatio = item.picArea.imageRatio.toFloat()
