@@ -319,7 +319,7 @@ class ContentAreaListAdapter(
             }
 
             //7：配图：一行一个
-      /*      "7" -> {
+            "7" -> {
 
                 val rechargeAdapter = ContentAreaListPicListAdapter(
                     R.layout.adapter_recharge_contentarealist_piclist,
@@ -332,7 +332,7 @@ class ContentAreaListAdapter(
                     adapter = rechargeAdapter
                 }
 
-            }*/
+            }
 
             //8：配图2：一行两个
             "8" -> {

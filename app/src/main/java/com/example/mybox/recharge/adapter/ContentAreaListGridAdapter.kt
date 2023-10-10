@@ -20,12 +20,13 @@ class ContentAreaListGridAdapter(
 ) :
     BaseQuickAdapter<GetFeedListData.FeedListBean.PicListBean, BaseViewHolder>(layoutResId, data) {
     override fun convert(holder: BaseViewHolder, item: GetFeedListData.FeedListBean.PicListBean) {
+
         val binding = AdapterRechargeContentarealistPiclistDoubleBinding.bind(holder.itemView)
-      /*  //卡片锁宽等比缩放（imageRatio用来计算高度）
+        //卡片锁宽等比缩放（imageRatio用来计算高度）
         val layoutParams = binding.ivImageUrl.layoutParams as ConstraintLayout.LayoutParams
         layoutParams.dimensionRatio = item.imageRatio // 例如，设置宽高比为16:9
 
-        binding.ivImageUrl.layoutParams = layoutParams*/
+        binding.ivImageUrl.layoutParams = layoutParams
 
 
         //在协程中加载网络图片或在后台线程中加载大量图片。

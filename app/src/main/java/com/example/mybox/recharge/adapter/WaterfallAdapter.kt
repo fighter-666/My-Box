@@ -221,7 +221,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
               }
 
               GetFeedListData.FEED_LIST_ITEM_TYPE.RECHARGE.toInt() -> {
-                  holder.addOnClickListener(R.id.btn_select)
+                  holder.addOnClickListener(R.id.btnSelect)
                   // 处理充值布局
                   val binding = WidgetMultipleItemRechargeBinding.bind(holder.itemView)
 

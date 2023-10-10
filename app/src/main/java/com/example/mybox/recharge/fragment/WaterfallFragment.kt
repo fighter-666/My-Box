@@ -118,7 +118,7 @@ class WaterfallFragment : BaseLazyFragment() {
         //监听条目子组件的点击事件
         myAdapter.setOnItemChildClickListener { adapter, view, position ->
             when (view.id) {
-                R.id.btn_select -> {
+                R.id.btnSelect -> {
                     requestReadContactsPermission()
                 }
             }
