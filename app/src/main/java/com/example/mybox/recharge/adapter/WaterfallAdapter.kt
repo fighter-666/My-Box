@@ -220,10 +220,10 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
               }
 
               GetFeedListData.FEED_LIST_ITEM_TYPE.RECHARGE.toInt() -> {
+                  //注册子控件的点击事件
                   holder.addOnClickListener(R.id.btnSelect)
                   // 处理充值布局
                   val binding = WidgetMultipleItemRechargeBinding.bind(holder.itemView)
-
 
                 //消除空格，并且第四位到第七位用*代替
                 binding.etPhone.text =
@@ -239,29 +239,12 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                 }
             }
 
-            /*GetFeedListData.FEED_LIST_ITEM_TYPE.BANNER.toInt() -> {
-                *//*val binding = WidgetMultipleItemAdvertiseBinding.bind(holder.itemView)
-                val rechargeAdapter = AdvertiseAdapter(R.layout.adapter_advertise, item.adLists)
-
-                //设置布局管理器和给recyclerView 设置设配器
-                binding.rvAdList.apply {
-                    layoutManager = LinearLayoutManager(context)
-                    adapter = rechargeAdapter
-                }*//*
-            }*/
             else -> {
 
             }
 
         }
     }
-
-/*    //它接受一个函数类型的参数 listener，该函数类型接受一个 Piggy 对象作为参数，并不返回任何结果
-    fun setOnItemClickListener(listener: (GetFeedListData.FeedListBean) -> Unit) {
-        //onItemClickListener 被赋值为传入的 listener，
-        // 从而将外部传入的点击事件监听器与适配器关联起来
-        onItemClickListener = listener
-    }*/
 
     //第四位到第七位用*代替
     private fun hideCharactersFromIndex(text: String): String {
@@ -276,6 +259,13 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
         }
 
         return hiddenText.toString()
+    }
+
+    fun addMoreValue(feedList: MutableList<GetFeedListData.FeedListBean>, newData: List<GetFeedListData.FeedListBean>) {
+        // 将新数据（newData）添加到现有的 feedList 集合中
+        feedList.addAll(newData)
+        // 或者，如果你希望新数据添加到开头，可以使用以下方式
+        // feedList.addAll(0, newData)
     }
 }
 

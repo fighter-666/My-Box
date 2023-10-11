@@ -2,6 +2,7 @@ package com.example.mybox.activity
 
 import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -18,9 +19,10 @@ import com.example.myapplication.recharge.fragment.WaterfallFragment
 import com.example.myapplication.util.DensityUtils
 import com.example.mybox.R
 import com.example.mybox.databinding.ActivityRechargePageBinding
-import com.example.mybox.recharge.adapter.FragmentAdapter
 import com.example.mybox.recharge.adapter.Viewpager2Adapter
 import com.example.mybox.recharge.data.GetFeedTabData
+import com.example.mybox.recharge.widget.LoadMoreManager
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
@@ -31,6 +33,7 @@ import com.scwang.smart.refresh.layout.constant.SpinnerStyle
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlin.math.abs
 
 
 class RechargePageActivity : AppCompatActivity() {
@@ -46,6 +49,27 @@ class RechargePageActivity : AppCompatActivity() {
             .titleBar(binding.tvTitle)    //解决状态栏和布局重叠问题，任选其一
             .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
             .init()
+
+        binding.refreshLayout.setOnLoadMoreListener {
+            binding.refreshLayout.finishLoadMore(2000)
+            LoadMoreManager.triggerLoadMore()
+        }
+
+
+        binding.appbar.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
+            // 计算AppBarLayout的滚动偏移与其总高度的比例
+            val offsetRatio = abs(verticalOffset).toFloat() / appBarLayout.totalScrollRange
+
+            // 设置TabLayout的背景颜色，你可以根据需要进行定制
+            if (offsetRatio == 1f) {
+                // 当吸顶时
+                binding.tabLayout.setBackgroundColor(resources.getColor(R.color.white))
+            } else {
+                // 当未吸顶时，或者根据需要设置渐变效果
+                binding.tabLayout.setBackgroundColor(resources.getColor(R.color.gray_200))
+            }
+            binding.tabLayout.invalidate()
+        }
 
 
 // 设置 Header 为贝塞尔雷达样式
